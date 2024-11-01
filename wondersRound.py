@@ -131,3 +131,15 @@ def roundTwoWonders():
     printRoundTwoWonderCardsNames()
     chooseWondercard(2)#3
     printRoundTwoWonderCardsNames()
+
+
+def gameStarts():
+    shuffleWonderCards()
+    print("Welcome to the 7 Wonders duel")
+    chooseFirstPlayer()
+    print("player" +str(currentPlayer)+ "choose one Wonder")
+    roundOneWonders()
+    switchPlayer()
+    roundTwoWonders()
+    print("human--->" + str(humanWonders))
+    print("computer--->"+str(computerWonders))
