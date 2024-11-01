@@ -103,3 +103,31 @@ def chooseWondercard(round):
                 else:
                     humanWonders.append(roundTwoWonderCards[cardNo2])
 
+def roundOneWonders():
+    printRoundOneWonderCardsNames()
+    chooseWondercard(1)#1
+    switchPlayer()
+    printRoundOneWonderCardsNames()
+    chooseWondercard(1)#2a
+    printRoundOneWonderCardsNames()
+    chooseWondercard(1)#2b
+    switchPlayer()
+    printRoundOneWonderCardsNames()
+    chooseWondercard(1)#3
+    printRoundOneWonderCardsNames()
+
+
+
+
+def roundTwoWonders():
+    printRoundTwoWonderCardsNames()
+    chooseWondercard(2)#1
+    switchPlayer()
+    printRoundTwoWonderCardsNames()
+    chooseWondercard(2)#2a
+    printRoundTwoWonderCardsNames()
+    chooseWondercard(2)#2b
+    switchPlayer()
+    printRoundTwoWonderCardsNames()
+    chooseWondercard(2)#3
+    printRoundTwoWonderCardsNames()
