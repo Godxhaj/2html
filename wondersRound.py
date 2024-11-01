@@ -1,4 +1,5 @@
 import random
+from const import *
 
 BLACK = '\033[30m'
 RED = '\033[31m'
@@ -71,6 +72,34 @@ def printValuesOfDicRoundOne(i):#kolpo gia na ginei lista "string"
     stri=list(wonderCostDict[roundOneWonderCards[i]])
     return str(stri)
 
-shuffleWonderCards()
-printRoundOneWonderCardsNames()
-printRoundTwoWonderCardsNames()
+def chooseWondercard(round):
+    global humanWonders,computerWonders
+    if round==1:
+        i=0
+        while i==0:
+            #cardNo1=int(input("give a noumber to pick a wonder(1-4)"))  #manualy keyboard
+            cardNo1=random.randint(0,3)                     #randomly
+            if  (cardNo1>=4 or cardNo1<0) or roundOneWonderCardsPicked[cardNo1]==True:
+                print("is already picked,choose other")
+            else:
+                i=1
+                roundOneWonderCardsPicked[cardNo1]=True
+                if currentPlayer==1:
+                    computerWonders.append(roundOneWonderCards[cardNo1])
+                else:
+                    humanWonders.append(roundOneWonderCards[cardNo1])
+    else:
+        b=0
+        while b==0:
+            #cardNo2=int(input("give a noumber to pick a wonder(1-4)"))  #manualy keyboard
+            cardNo2=random.randint(0,3)                     #randomly
+            if  (cardNo2>=4 or cardNo2<0) or roundTwoWonderCardsPicked[cardNo2]==True:
+                print("is already picked,choose other")
+            else:
+                b=1
+                roundTwoWonderCardsPicked[cardNo2]=True
+                if currentPlayer==1:
+                    computerWonders.append(roundTwoWonderCards[cardNo2])
+                else:
+                    humanWonders.append(roundTwoWonderCards[cardNo2])
+
