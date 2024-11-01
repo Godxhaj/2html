@@ -2,6 +2,7 @@ import random
 
 progressIndicators=["agriculture","architecture","economy","law","masonry","mathematics","philosophy","strategy","theology","urbanism"]
 gameProgressIndicators=[]
+isGameProgressIndicatorOnBoard=[True,True,True,True,True]
 
 strategyIndicatorPosition=0
 
@@ -54,4 +55,15 @@ def getReg(i):
         reg=1
     return reg*abs((abs(i) // 3)+1)   
 
+def printProgressIndicators():
+    str=""
+    for i in range(0,5):
+        if isGameProgressIndicatorOnBoard[i]==True:
+            str+=LIGHT_GRAY+gameProgressIndicators[i]+'  '+RESET
+        else:
+            str+=DARK_GRAY+gameProgressIndicators[i]+'  '+RESET
+    print(str)
+
+shuffleProgressIndicators()
+printProgressIndicators()
 printStrategyBoard()
