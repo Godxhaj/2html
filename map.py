@@ -69,4 +69,4 @@ def map():
     printProgressIndicators()
     printStrategyBoard()
 
-map()
+#map()
