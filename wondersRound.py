@@ -28,6 +28,20 @@ wonderCards=(list(wonderCostDict.keys()))     #we take only the name of the dict
 roundOneWonderCardsPicked=[False]*4
 roundTwoWonderCardsPicked=[False]*4
 
+
+
+def chooseFirstPlayer():
+    global currentPlayer
+    currentPlayer=random.randint(1,2)
+def switchPlayer():
+    global currentPlayer
+    if currentPlayer==Computer:
+        currentPlayer=Human
+    else:
+        currentPlayer=Computer
+
+
+
 def shuffleWonderCards(): #shuffles wonderCards and gives 2  4card-lists for the 2 rounds
     global wonderCards,gameWonderCards,roundOneWonderCards,roundTwoWonderCards
     random.shuffle(wonderCards)
@@ -103,6 +117,10 @@ def chooseWondercard(round):
                 else:
                     humanWonders.append(roundTwoWonderCards[cardNo2])
 
+
+
+
+
 def roundOneWonders():
     printRoundOneWonderCardsNames()
     chooseWondercard(1)#1
@@ -143,3 +161,6 @@ def gameStarts():
     roundTwoWonders()
     print("human--->" + str(humanWonders))
     print("computer--->"+str(computerWonders))
+
+
+#gameStarts()
