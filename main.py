@@ -1,8 +1,9 @@
 from wondersRound import*
 from const import *
 from map import*
-from ages.ageOne import * 
+from ageOne import * 
 
-gko()
+#roundAgeOne()
 #map()
 #gameStarts()
+roundAgeOne()
