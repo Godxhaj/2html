@@ -149,3 +149,48 @@ def roundAgeOne():
         switchPlayer()
 
 #roundAgeOne()
+
+
+def buildcard(card,currentPlayer):
+     global HumanBank
+     temp=[]
+     canBuild=1
+     if currentPlayer==Human:
+        for i in range(0,9):
+            if cardsDict["Age1"][gameAgeOneCards[card]][0][i]>HumanBank[i]:#if cost of card > human card
+                canBuild=0
+                ##a functions tha holds what we need to build this
+        if canBuild:
+            for i in range(0,len(HumanBank)):
+                temp.append(cardsDict["Age1"][gameAgeOneCards[card]][1][i]+HumanBank[i])
+        HumanBank=temp
+        #HumanBank[10]-=cardsDict["Age1"][gameAgeOneCards[card]][0][8]
+        
+
+
+
+shuffleAgeOneCardsAndCreateStacks()
+buildcard(2,Human)
+
+print(HumanBank)
+
+
+
+
+
+
+
+
+def decideForTrue(p): # p 0%->100%
+    x=random.randint(0,100)
+    return x<p
+
+
+def decideAction(): # keep it(build), discard, build wonders
+    if decideForTrue(50): #decide to keep it
+        print('Player:',playerName[currentPlayer-1],' keeps the card')
+    else:
+        print('Player:',playerName[currentPlayer-1],' discards the card and earns 2coins')
+        print('now has ',getMoney(),'coins')
+        addMoney(currentPlayer,2)
+        # να παραμείνει στη λίστα του παίκτη και να εισαχθεί στη λίστα των discard καρτών του
