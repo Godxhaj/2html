@@ -1,4 +1,17 @@
 import random
+from constNames import *
+import inspect
+
+def p(var):
+    current_frame = inspect.currentframe()
+    try:
+        frame_locals = current_frame.f_back.f_locals
+        var_name = [name for name, value in frame_locals.items() if value is var][0]
+        return f"{var_name}" 
+        #print(f"Variable name: {var_name}")
+    finally:
+        del current_frame
+
 currentPlayer=0
 humanWonders=[]
 computerWonders=[]
@@ -10,18 +23,31 @@ moneyOfComputer=7
 
 cardsDict={
     "Age1":{
-        "LumberYard":[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],"LoggingCamp":[[0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0]],
-        "ClayPool":[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],"ClayPit":[[0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0]],
-        "Quarry":[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],"StonePit":[[0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0]],
-        "Glassworks":[[0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0]],"Press":[[0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0]],
-        "GuardTower":[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],"WorkShop":[[0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],
-        "Apothecary":[[0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],"StoneReserve":[[0,0,0,0,0,0,0,0,3],[0,0,0,0,0,0,0,0,0,0,0]],
-        "ClayReserve":[[0,0,0,0,0,0,0,0,3],[0,0,0,0,0,0,0,0,0,0,0]],"WoodReserve":[[0,0,0,0,0,0,0,0,3],[0,0,0,0,0,0,0,0,0,0,0]],
-        "Stable":[[1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],"Garrison":[[0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],
-        "Palisade":[[0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0]],"Scriptorium":[[0,0,0,0,0,0,0,0,2],[0,0,0,0,0,0,0,0,0,0,0]],
-        "Pharmacist":[[0,0,0,0,0,0,0,0,2],[0,0,0,0,0,0,0,0,0,0,0]],"Theater":[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],
-        "Altar":[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],"Baths":[[0,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]],
-        "Tavern":[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]
+    "Lumber_Yard" :[Brown, [0], [0,Wood]],
+    "LoggingCamp": [Brown, [1], [0,Wood]],
+    "ClayPool": [Brown, [0], [0,Brick]],
+    "ClayPit" :[Brown, [1], [0,Brick]],
+    "Quarry":[Brown, [0], [0,Stone]],
+    "StonePit":[Brown, [1], [0,Stone]],
+    "Glassworks":[Grey, [1], [0,Glass]],
+    "Press":[Grey, [1], [0,Papyrus]],
+    "GuardTower":[Red, [0], [0,Attack]],
+    "WorkShop":[Green, [0,Papyrus], [0,Triangle,Vpoint]],
+    "Apothecary":[Green, [0,Glass], [0,Wheel,Vpoint]],
+    "StoneReserve":[Gold, [3], [0,StoneDec]],
+    "ClayReserve":[Gold, [3], [0,BrickDec]],
+    "WoodReserve":[Gold, [3], [0,WoodDec]],
+    "Stable":[Red, [0,Wood], [0,Attack,Petal]],
+    "Garrison":[Red, [0,Book], [0,Attack,Knife]],
+    "Palisade":[Red, [2], [0,Attack,Castle]],
+    "Scriptorium":[Green, [2], [0,Feather,Book]],
+    "Pharmacist":[Green, [2], [0,Plate,Setting]],
+    "Theater":[Blue, [0], [0,Vpoint,Vpoint,Vpoint]],
+    "Altar":[Blue, [0], [0,Vpoint,Vpoint,Vpoint]],
+    "Baths":[Blue, [0,Stone], [0,Vpoint,Vpoint,Vpoint]],
+    "Tavern":[Gold, [0], [4,Vase]]
+
+        
     },
     "Age2":{
         "Sawmill":[0,0,0,0,0,0,0,0,2],"Brickyard":[0,0,0,0,0,0,0,0,2],"ShelfQuarry":[0,0,0,0,0,0,0,0,2],"Glassblower":[0,0,0,0,0,0,0,0,0],"DryingRoom":[0,0,0,0,0,0,0,0,0],
@@ -37,6 +63,33 @@ cardsDict={
         "Gardens":[2,2,0,0,0,0,0,0,0],"Pantheon":[1,1,0,0,2,0,0,0,0],"Senate":[0,2,1,0,1,0,0,0,0],"Lighthouse":[0,2,0,1,0,0,0,0,0],"Arena":[1,1,1,0,0,0,0,0,0]#τα ίδια με τα απο πάνω
     }
 }
+
+
+
+
+Lumber_Yard = ["Brown", [""], ["Wood"]]
+Logging_Camp = ["Brown", ["1"], ["Wood"]]
+Clay_Pool = ["Brown", [""], ["Brick"]]
+Clay_Pit = ["Brown", ["1"], ["Brick"]]
+Quarry = ["Brown", [""], ["Stone"]]
+Stone_Pit = ["Brown", ["1"], ["Stone"]]
+Glassworks = ["Grey", ["1"], ["Glass"]]
+Press = ["Grey", ["1"], ["Papyrus"]]
+Guard_Tower = ["Red", [""], ["Attack"]]
+Workshop = ["Green", ["papyrus"], ["Triangle","Vpoint"]]
+Apothecary = ["Green", ["glass"], ["Wheel","Vpoint"]]
+Stone_Reserve = ["Gold", ["3"], ["StoneDec"]]
+Clay_Reserve = ["Gold", ["3"], ["BrickDec"]]
+Wood_Reserve = ["Gold", ["3"], ["WoodDec"]]
+Stable = ["Red", ["wood"], ["Attack","petal"]]
+Garrison = ["Red", ["brick"], ["Attack","knife"]]
+Palisade = ["Red", ["2"], ["Attack","castle"]]
+Scriptorium = ["Green", ["2"], ["Feather","book"]]
+Pharmacist = ["Green", ["2"], ["plate","setting"]]
+Theater = ["Blue", [""], ["Vpoint","Vpoint","Vpoint"]]
+Altar = ["Blue", [""], ["Vpoint","Vpoint","Vpoint"]]
+Baths = ["Blue", ["stone"], ["Vpoint","Vpoint","Vpoint"]]
+Tavern = ["Gold", [""], ["4"]]
 
 #CODE=[WOOD,BRICK,STONE,GLASS,PAPYRUS,ATTACK,SCIENCE,SYMBOL,FUNCTION,VPOINTS,GOLD]
 HumanBank=[0,0,0,0,0,0,0,0,0,0,0,moneyOfHuman]

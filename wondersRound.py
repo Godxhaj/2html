@@ -151,7 +151,7 @@ def roundTwoWonders():
     printRoundTwoWonderCardsNames()
 
 
-def gameStarts():
+def selectWonders():
     shuffleWonderCards()
     print("Welcome to the 7 Wonders duel")
     chooseFirstPlayer()

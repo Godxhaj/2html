@@ -64,7 +64,8 @@ def printProgressIndicators():
             str+=DARK_GRAY+gameProgressIndicators[i]+'  '+RESET
     print(str)
 
-def map():
+def printGameBoard():
+    print()
     shuffleProgressIndicators()
     printProgressIndicators()
     printStrategyBoard()

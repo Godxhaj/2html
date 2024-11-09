@@ -105,7 +105,7 @@ def check0sDict():
             minmax.append(i+1)
     print(min(minmax))
 
-def newChoose():
+def selectAgeOneCard():
     global gameAgeOneCardsIsPicked,minmax,ComputerCards,HumanCards
     notTakenYet=True
     while notTakenYet:
@@ -144,7 +144,7 @@ def roundAgeOne():
     shuffleAgeOneCardsAndCreateStacks()
     for i in range(0,20):
         printAgeOneStack()
-        newChoose() #να αλλάξει το όνομα σε selectAgeOneCard()
+        selectAgeOneCard() #να αλλάξει το όνομα σε selectAgeOneCard()
         #decideAction() 
         switchPlayer()
 
@@ -166,14 +166,22 @@ def buildcard(card,currentPlayer):
         HumanBank=temp
         #HumanBank[10]-=cardsDict["Age1"][gameAgeOneCards[card]][0][8]
         
+def newBuild(card):
+    city=[]
+    cost=((cardsDict["Age1"][gameAgeOneCards[card]][1]))  #cost of card in list
+    print(cost)
+    product=((cardsDict["Age1"][gameAgeOneCards[card]][2]))  #prod of card in list
+    for items in product:
+        city.append(items)
+    print(city)                  
 
 
 
+'''
 shuffleAgeOneCardsAndCreateStacks()
-buildcard(2,Human)
-
-print(HumanBank)
-
+print(gameAgeOneCards)
+newBuild(2)
+'''
 
 
 
