@@ -42,6 +42,15 @@ ageOneDictionary={
     "20":[1],
 }
 
+moneyOfHuman=7
+moneyOfComputer=7
+
+
+
+cityHuman=[]
+cityComputer=[]
+
+
 
 ageOneCards=["LumberYard","LoggingCamp","ClayPool","ClayPit","Quarry","StonePit","Glassworks","Press","GuardTower",
 "WorkShop","Apothecary","StoneReserve","ClayReserve","WoodReserve","Stable","Garrison","Palisade","Scriptorium","Pharmacist",
@@ -103,7 +112,6 @@ def check0sDict():
         if ageOneDictionary[str(i+1)][0]==1:
             gameAgeOneCardsIsTurned[i]=True
             minmax.append(i+1)
-    print(min(minmax))
 
 def selectAgeOneCard():
     global gameAgeOneCardsIsPicked,minmax,ComputerCards,HumanCards
@@ -124,6 +132,9 @@ def selectAgeOneCard():
                 print('Human takes ',gameAgeOneCards[numberOfCardChoosen-1])
         
 
+def chooseFirstPlayer():
+    global currentPlayer
+    currentPlayer=random.randint(1,2)
 
 def canTake(cardNo):
     if ageOneDictionary[str(cardNo)][0] !=1:
@@ -176,6 +187,58 @@ def newBuild(card):
     print(city)                  
 
 
+
+def keepcard(card):
+    global moneyOfComputer,moneyOfHuman
+    clear=1
+    humnothave=[]
+    compnothave=[]
+    cost=((cardsDict["Age1"][gameAgeOneCards[card]][1]))    #-->[coins,papyrus]
+    goods=((cardsDict["Age1"][gameAgeOneCards[card]][2])) 
+    if currentPlayer==Human:
+        for item in cost[1:]:
+            if item not in cityHuman:
+                humnothave.append(item)
+                clear=0
+        if  clear and cost[0]<=moneyOfHuman:  #checks coints with coins
+            print("you can build that card")
+            moneyOfHuman-=cost[0]
+            for i in range(1,len(goods)):
+                cityHuman.append((goods[i]))
+                moneyOfHuman+=goods[0]
+            
+        else:
+            print("you CANNOT build that")
+            print("you need to buy", humnothave)#na parw to variable name tis timis
+
+
+
+    if currentPlayer==Computer:
+            for item in cost[1:]:
+                if item not in cityComputer:
+                    compnothave.append(item)
+                    clear=0
+            if  clear and cost[0]<=moneyOfComputer:  #checks coints with coins
+                print("you can build that card")
+                moneyOfComputer-=cost[0]
+                for i in range(1,len(goods)):
+                    cityComputer.append(goods[i])
+                    moneyOfComputer+=goods[0]
+            else:
+                print("you CANNOT build that")
+                print("yoy need to buy",compnothave)
+
+
+
+
+print(cityHuman)
+chooseFirstPlayer()
+shuffleAgeOneCardsAndCreateStacks()
+keepcard(2)
+print(gameAgeOneCards[2])
+print(moneyOfComputer)
+print(moneyOfHuman)
+print(cityHuman)
 
 '''
 shuffleAgeOneCardsAndCreateStacks()

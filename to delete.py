@@ -1,5 +1,6 @@
 list1=[1,3,4]
-list2=[2,2,0,]
+list2=[4,6,1]
 
-if list1<list2:
-    print("yes")
+for item in list2:
+    if item in list1:
+        print("yes")

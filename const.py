@@ -2,6 +2,14 @@ import random
 from constNames import *
 import inspect
 
+def keno():
+    for i in range(0,5):
+        print()
+
+def grammes():
+    for i in range(0,2):
+        print("=====================================")
+        
 def p(var):
     current_frame = inspect.currentframe()
     try:
@@ -12,18 +20,24 @@ def p(var):
     finally:
         del current_frame
 
+
+
+
+
 currentPlayer=0
 humanWonders=[]
 computerWonders=[]
 Noboby,Computer,Human,Burned=0,1,2,3
 playerName=["Computer","Human"]
 
-moneyOfHuman=7
-moneyOfComputer=7
+#moneyOfHuman=7
+#moneyOfComputer=7
+
+
 
 cardsDict={
     "Age1":{
-    "Lumber_Yard" :[Brown, [0], [0,Wood]],
+    "LumberYard" :[Brown, [0], [0,Wood]],
     "LoggingCamp": [Brown, [1], [0,Wood]],
     "ClayPool": [Brown, [0], [0,Brick]],
     "ClayPit" :[Brown, [1], [0,Brick]],
@@ -67,20 +81,20 @@ cardsDict={
 
 
 
-Lumber_Yard = ["Brown", [""], ["Wood"]]
-Logging_Camp = ["Brown", ["1"], ["Wood"]]
-Clay_Pool = ["Brown", [""], ["Brick"]]
-Clay_Pit = ["Brown", ["1"], ["Brick"]]
+LumberYard = ["Brown", [""], ["Wood"]]
+LoggingCamp = ["Brown", ["1"], ["Wood"]]
+ClayPool = ["Brown", [""], ["Brick"]]
+ClayPit = ["Brown", ["1"], ["Brick"]]
 Quarry = ["Brown", [""], ["Stone"]]
-Stone_Pit = ["Brown", ["1"], ["Stone"]]
+StonePit = ["Brown", ["1"], ["Stone"]]
 Glassworks = ["Grey", ["1"], ["Glass"]]
 Press = ["Grey", ["1"], ["Papyrus"]]
-Guard_Tower = ["Red", [""], ["Attack"]]
+GuardTower = ["Red", [""], ["Attack"]]
 Workshop = ["Green", ["papyrus"], ["Triangle","Vpoint"]]
 Apothecary = ["Green", ["glass"], ["Wheel","Vpoint"]]
-Stone_Reserve = ["Gold", ["3"], ["StoneDec"]]
-Clay_Reserve = ["Gold", ["3"], ["BrickDec"]]
-Wood_Reserve = ["Gold", ["3"], ["WoodDec"]]
+StoneReserve = ["Gold", ["3"], ["StoneDec"]]
+ClayReserve = ["Gold", ["3"], ["BrickDec"]]
+WoodReserve = ["Gold", ["3"], ["WoodDec"]]
 Stable = ["Red", ["wood"], ["Attack","petal"]]
 Garrison = ["Red", ["brick"], ["Attack","knife"]]
 Palisade = ["Red", ["2"], ["Attack","castle"]]
@@ -91,6 +105,4 @@ Altar = ["Blue", [""], ["Vpoint","Vpoint","Vpoint"]]
 Baths = ["Blue", ["stone"], ["Vpoint","Vpoint","Vpoint"]]
 Tavern = ["Gold", [""], ["4"]]
 
-#CODE=[WOOD,BRICK,STONE,GLASS,PAPYRUS,ATTACK,SCIENCE,SYMBOL,FUNCTION,VPOINTS,GOLD]
-HumanBank=[0,0,0,0,0,0,0,0,0,0,0,moneyOfHuman]
-ComputerBank=[0,0,0,0,0,0,0,0,0,0,moneyOfComputer]
+
