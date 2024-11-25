@@ -1,31 +1,57 @@
-Brown=61
-Grey=62
-Red=63
-Green=64
-Gold=65
-Blue=66
+from colors import *
+currentPlayer=[0]
+playerWonders=[[],[]]
+Noboby,Computer,Human,Burned=-1,0,1,2
+playerName=["Computer","Human"]
+coins=[7,7] # coins of Computer,Human
+roundOne,roundTwo=0,1
 
-Wood=10
-Brick=11
-Stone=12
-Glass=13
-Papyrus=14
+cityOfPlayer=[[],[]]
+minmax=[]
+playersCards=[[],[]]
 
-Attack=20
-Vpoint=21
 
-Feather=30
-Triangle=31
-Wheel=32
-Plate=33
+lista=[-1]*100
+Wood, Brick, Stone, Glass, Papyrus = 10, 11, 12, 13, 14
+Attack, Vpoint = 20, 21
+Feather, Triangle, Wheel, Plate = 30, 31, 32, 33
+Petal, Knife, Castle, Book, Setting, Vase = 40, 41, 42, 43, 44, 45
+StoneDec, BrickDec, WoodDec = 50, 51, 52
+Brown, Grey, Red, Green, Gold, Blue = 61, 62, 63, 64, 65, 66
 
-Petal=40
-Knife=41
-Castle=42
-Book=43
-Setting=44
-Vase=45
+lista[Noboby] = "Noboby"
+lista[Computer] = "Computer"
+lista[Human] = "Human"
+lista[Burned] = "Burned"
 
-StoneDec=50
-BrickDec=51
-WoodDec=52
+lista[Brown] = "Brown"
+lista[Grey] = "Grey"
+lista[Red] = "Red"
+lista[Green] = "Green"
+lista[Gold] = "Gold"
+lista[Blue] = "Blue"
+
+lista[Wood] = "Wood"
+lista[Brick] = "Brick"
+lista[Stone] = "Stone"
+lista[Glass] = "Glass"
+lista[Papyrus] = "Papyrus"
+
+lista[Attack] = "Attack"
+lista[Vpoint] = "Vpoint"
+
+lista[Feather] = "Feather"
+lista[Triangle] = "Triangle"
+lista[Wheel] = "Wheel"
+lista[Plate] = "Plate"
+
+lista[Petal] = "Petal"
+lista[Knife] = "Knife"
+lista[Castle] = "Castle"
+lista[Book] = "Book"
+lista[Setting] = "Setting"
+lista[Vase] = "Vase"
+
+lista[StoneDec] = "StoneDec"
+lista[BrickDec] = "BrickDec"
+lista[WoodDec] = "WoodDec"

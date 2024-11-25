@@ -1,0 +1,6 @@
+from playGame import *
+
+playGame()
+
+
+

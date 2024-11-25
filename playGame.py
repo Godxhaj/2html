@@ -1,21 +1,21 @@
+import constNames
 from wondersRound import*
 from const import *
 from map import*
 from ageOne import * 
+from constNames import *
+import os
 
-
-grammes()
 foo=True
-#print(p(Castle),p(Red),p(Grey),p(Computer))
+os.system('cls')
 def playGame():    
-    selectWonders()
-    #selectRandomlyFirstPlayer() 
-    shuffleAgeOneCardsAndCreateStacks()
-    while foo:
-        grammes()
-        printGameBoard()
-        keno()
-        grammes()
+    printGameStartLogo()
+    selectFirstPlayer() #επιλέγεται τυχαία ο πρώτος παίκτης
+    playWonder()   # παίξιμο της φάσης επιλογής καρτών Wonder 
+    shuffleAgeOneCardsAndCreateStacks()    
+    while foo:        
+        printGameBoard()        
+        # grammes()
         printAgeOneStack()
         selectAgeOneCard() #current player select
         print()
@@ -26,4 +26,5 @@ def playGame():
         switchPlayer()
 
 playGame()
-#roundAgeOne()
+
+
