@@ -12,14 +12,52 @@ def getTwentyAgeOneCards():
     gameAgeOneCards=ageOneCards[:20]# επιλέγουμε τις 20 πρώτες κάρτες μετά το ανακάτεμα
 
 
+
+
+
 def createStacks(): #ok
     global gameAgeOneCardsStacks,gameAgeOneCardsIsTurned    
-    gameAgeOneCardsStacks=[[gameAgeOneCards[:2]],[gameAgeOneCards[2:5]],[gameAgeOneCards[5:9]],[gameAgeOneCards[9:14]],[gameAgeOneCards[14:20]]]
+    gameAgeOneCardsStacks=[gameAgeOneCards[:2],gameAgeOneCards[2:5],gameAgeOneCards[5:9],gameAgeOneCards[9:14],gameAgeOneCards[14:20]]
     gameAgeOneCardsIsTurned[:2]=[True]*6
     gameAgeOneCardsIsTurned[2:5]=[False]*3
     gameAgeOneCardsIsTurned[5:9]=[True]*4
     gameAgeOneCardsIsTurned[9:14]=[False]*5
     gameAgeOneCardsIsTurned[14:20]=[True]*6
+
+
+def check0sDict(): #ok
+    global gameAgeOneCardsIsTurned,minmax
+    for i in range(0,20):
+        if ageOneDictionary[str(i+1)][0]==1:
+            gameAgeOneCardsIsTurned[i]=True
+            minmax.append(i+1)
+            
+
+
+
+def printAgeOneStack(): #ok
+    check0sDict()
+    counterOfCardsList=0                                 # a variable to run from 0 to 19 via loops and check  the lists we have for turned,picked.
+    for i in range(0,len(gameAgeOneCardsStacks)):        # 0,1,2,3,4,
+        for items in gameAgeOneCardsStacks[i]:           # for i =0 [pitsa souvlaki]---> items= pitsa souvlaki
+            if gameAgeOneCardsIsTurned[counterOfCardsList]==False:
+                print("[-----]",end='   ')
+            else:
+                if(gameAgeOneCardsIsPicked[counterOfCardsList]==True):
+                    print(RED,end='   ')
+                    print(items,end='   ')
+                    print(RESET,end='   ')
+                elif(ageOneDictionary[str(counterOfCardsList+1)][0]==1):  # at ageOneDictionary( the 1st varible is 1==it means its available to be choosen)
+                    print(GREEN,end='  ')
+                    print(items,end='  ')
+                    print(RESET,end='  ')
+                else:
+                    print(items,end='   ')
+                
+            counterOfCardsList+=1
+        print()
+        print()
+    print("------------------------------------------")
 
 
 def playAgeOne():
@@ -28,34 +66,14 @@ def playAgeOne():
     createStacks()
 
 playAgeOne()
-print(gameAgeOneCardsStacks[0])
+#print(gameAgeOneCardsStacks[0])
 
-# def printAgeOneStack(): #ok
-#     check0sDict()
-#     counterOfCardsList=0                                 # a variable to run from 0 to 19 via loops and check  the lists we have for turned,picked.
-#     for i in range(0,len(gameAgeOneCardsStacks)):        # 0,1,2,3,4,
-#         for items in gameAgeOneCardsStacks[i]:           # for i =0 [pitsa souvlaki]---> items= pitsa souvlaki
-#             if gameAgeOneCardsIsTurned[counterOfCardsList]==False:
-#                 print("[-----]",end='   ')
-#             else:
-#                 if(gameAgeOneCardsIsPicked[counterOfCardsList]==True):
-#                     print(RED,end='   ')
-#                     print(items,end='   ')
-#                     print(RESET,end='   ')
-#                 else:
-#                     print(items,end='   ')
-#             counterOfCardsList+=1
-#         print()
-#         print()
-#     print("------------------------------------------")
 
-# def check0sDict(): #ok
-#     global gameAgeOneCardsIsTurned,minmax
-#     for i in range(0,20):
-#         if ageOneDictionary[str(i+1)][0]==1:
-#             gameAgeOneCardsIsTurned[i]=True
-#             minmax.append(i+1)
 
+
+
+
+#printAgeOneStack()
 # def selectAgeOneCard():
 #     global gameAgeOneCardsIsPicked,minmax,ComputerCards,HumanCards
 #     notTakenYet=True
