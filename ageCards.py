@@ -41,8 +41,8 @@ cardsDict={
     "GlassBlower": [Grey, [0], [0,Glass]],
     "Drying Room": [Grey, [0], [0,Papyrus]],
     "Walls": [Red, [0,Stone,Stone],[0,Attack,Attack]],
-    "Forum": [Gold, [3,Brick],[0,GlassPapyrusMix]],
-    "Caravansery": [Gold, [2,Glass,Papyrus],[0,WoodStoneBrickMix]],
+    "Forum": [Gold, [3,Brick],[0,GlassOrPapyrus]],
+    "Caravansery": [Gold, [2,Glass,Papyrus],[0,WoodOrStoneOrBrick]],
     "CustomsHouse": [Gold, [4],[0,GlassDec,PapyrusDec]],
     "Tribunal": [Blue, [0,Wood, Wood,Glass], [0,Vpoint,Vpoint,Vpoint,Vpoint,Vpoint]],
     "HorseBreeders": [Red, [0,Wood, Brick,Petal], [0,Attack]],
@@ -53,12 +53,12 @@ cardsDict={
     "Dispensary": [Green, [0,Brick,Brick,Stone,Setting],[0,Plate,Vpoint,Vpoint]],
     "School": [Green, [0,Wood,Papyrus,Papyrus],[0,Vpoint,Wheel,Harp]],
     "Laboratory": [Green, [0,Wood,Glass,Glass],[0,Vpoint,Triangle,Lamp]],
-    "Statue": [Blue, [0,Brick,Brick,Mask],[0,Vpoint,Vpoint,Vpoint,Vpoint,Akropoli]],
+    "Statue": [Blue, [0,Brick,Brick,Mask],[0,Vpoint,Vpoint,Vpoint,Vpoint,Acropoli]],
     "Temple": [Blue, [0,Moon,Wood,Papyrus], [0,Vpoint,Vpoint,Vpoint,Vpoint,Sun]],
     "Aqueduct": [Blue,[0,Stone,Stone,Stone,Drop],[0,Vpoint,Vpoint,Vpoint,Vpoint,Vpoint]],
-    "Rostrum": [Blue,[0,Stone,Wood],[0,Vpoint,Vpoint,Vpoint,Vpoint,Spiti]],
+    "Rostrum": [Blue,[0,Stone,Wood],[0,Vpoint,Vpoint,Vpoint,Vpoint,Home]],
     "Brewery": [Gold,[0], [6,Barel]],
-}
+},
 
     "Age3":{
         "Arsenal":[2,3,0,0,0,0,0,0,0],"Courthouse":[0,0,0,0,0,0,0,0,8],"Academy":[1,0,1,2,0,0,0,0,0],"Study":[2,0,0,1,1,0,0,0,0],"ChamberOfCommerce":[0,0,0,0,2,0,0,0,0],

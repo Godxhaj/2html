@@ -13,6 +13,11 @@ def switchPlayer():
     else:
         currentPlayer[0]=Computer
 
+def gp(n):
+    str=""
+    for i in range(0,n):
+        str+=" "
+    return str
 
 def printGameStartLogo():
     print(RED,'****************************')

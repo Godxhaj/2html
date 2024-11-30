@@ -2,6 +2,7 @@ import random
 from const import*
 from colors import *
 from ageCards import *
+from mainFunctions import *
 
 def shuffleAgeOneCards():
     global ageOneCards
@@ -12,10 +13,7 @@ def getTwentyAgeOneCards():
     gameAgeOneCards=ageOneCards[:20]# επιλέγουμε τις 20 πρώτες κάρτες μετά το ανακάτεμα
 
 
-
-
-
-def createStacks(): #ok
+def createStack(): #ok
     global gameAgeOneCardsStacks,gameAgeOneCardsIsTurned    
     gameAgeOneCardsStacks=[gameAgeOneCards[:2],gameAgeOneCards[2:5],gameAgeOneCards[5:9],gameAgeOneCards[9:14],gameAgeOneCards[14:20]]
     gameAgeOneCardsIsTurned[:2]=[True]*6
@@ -24,64 +22,97 @@ def createStacks(): #ok
     gameAgeOneCardsIsTurned[9:14]=[False]*5
     gameAgeOneCardsIsTurned[14:20]=[True]*6
 
+def cardHasNoBounds(n):
+    return ageOneDictionary[str(n+1)][0]==NoBounds    
+def turnCard(n):
+    gameAgeOneCardsIsTurned[n]=True
 
-def check0sDict(): #ok
+def updateStateOfCards(): # ανανεώνει ενδεχόμενη κατάσταση επιλογής κάρτας
     global gameAgeOneCardsIsTurned,minmax
     for i in range(0,20):
-        if ageOneDictionary[str(i+1)][0]==1:
-            gameAgeOneCardsIsTurned[i]=True
-            minmax.append(i+1)
-            
+        if cardHasNoBounds(i):
+            turnCard(i)
 
 
 
-def printAgeOneStack(): #ok
-    check0sDict()
+def updateAndPrintAgeOneStack(): #ok
+    updateStateOfCards()
+    print(YELLOW,"+--------  AGE ONE STACK  ------------------------+",RESET)
     counterOfCardsList=0                                 # a variable to run from 0 to 19 via loops and check  the lists we have for turned,picked.
     for i in range(0,len(gameAgeOneCardsStacks)):        # 0,1,2,3,4,
         for items in gameAgeOneCardsStacks[i]:           # for i =0 [pitsa souvlaki]---> items= pitsa souvlaki
             if gameAgeOneCardsIsTurned[counterOfCardsList]==False:
-                print("[-----]",end='   ')
+                print(gp(10),"[-----]",end='   ')
             else:
                 if(gameAgeOneCardsIsPicked[counterOfCardsList]==True):
-                    print(RED,end='   ')
-                    print(items,end='   ')
-                    print(RESET,end='   ')
+                    print(gp(10),RED,end='   ')
+                    print(gp(10),items,end='   ')
+                    print(gp(10),RESET,end='   ')
                 elif(ageOneDictionary[str(counterOfCardsList+1)][0]==1):  # at ageOneDictionary( the 1st varible is 1==it means its available to be choosen)
-                    print(GREEN,end='  ')
-                    print(items,end='  ')
-                    print(RESET,end='  ')
+                    print(gp(10),GREEN,end='  ')
+                    print(gp(10),items,end='  ')
+                    print(gp(10),RESET,end='  ')
                 else:
-                    print(items,end='   ')
-                
+                    print(gp(10),items,end='   ')                
             counterOfCardsList+=1
         print()
         print()
-    print("------------------------------------------")
+    print(YELLOW,"+------------------------------------------+",RESET)
 
 
 def playAgeOne():
-    shuffleAgeOneCards()
-    getTwentyAgeOneCards()
-    createStacks()
+    shuffleAgeOneCards() # ανακατεύονται όλες οι κάρτες
+    getTwentyAgeOneCards() #επιλέγονται 20 κάρτες από τις 23
+    createStack() # 
+    updateAndPrintAgeOneStack()
 
-playAgeOne()
-#print(gameAgeOneCardsStacks[0])
+def setCardIsTaken(n):
+    global ageOneDictionary
+    ageOneDictionary[str(n)][0]=Taken
 
+def allCardsAreTaken():
+    cardsTaken=0
+    for i in range(0,20):
+        if ageOneDictionary[str(i+1)][0]==Taken:
+            cardsTaken+=1
+    print("   Cards Taken=",cardsTaken)
+    return cardsTaken==20
 
+def selectRandomlyAgeOneCard():
+    i=0
+    while(not allCardsAreTaken()):
+        numberOfCardChoosen=random.randint(0,19) 
+        if cardHasNoBounds(numberOfCardChoosen):
+            return numberOfCardChoosen
+        i+=1
+        if i==10:
+            break
+    return EndOfCards      
 
+def getAgeOneCard():
+    global ageOneDictionary
+    numberOfCardToGet=selectRandomlyAgeOneCard()
+    if numberOfCardToGet==EndOfCards:
+        return EndOfCards
+    ageOneDictionary[str(numberOfCardToGet+1)][0]=Taken
+    print('Player ',playerName[currentPlayer[0]],' has just got ',ageOneCards[numberOfCardToGet])
+    return numberOfCardToGet
 
-
-
-#printAgeOneStack()
+shuffleAgeOneCards()
+selectFirstPlayer()
+for i in range(0,10):
+    if getAgeOneCard()==EndOfCards:
+        break
+    switchPlayer()
+print("End of Age One Cards!")
+# ### ΤΕΡΑΣ!!! ###
 # def selectAgeOneCard():
-#     global gameAgeOneCardsIsPicked,minmax,ComputerCards,HumanCards
+#     global gameAgeOneCardsIsPicked,playersCards
 #     notTakenYet=True
-#     while notTakenYet:
-#         #numberOfCardChoosen=int(input("choose a card from 1 to 20")) #xeirokinita me input
-#         numberOfCardChoosen=random.randint(min(minmax),max(minmax))   #dialegei mono toy tuxaia noumera
-#         if canTake(numberOfCardChoosen):# and gameAgeOneCardsIsPicked[numberOfCardChoosen-1]==False:
-#             ageOneDictionary[str(numberOfCardChoosen)][0]=0 # card is picked            
+#     while notTakenYet:        
+#         numberOfCardChoosen=random.randint(0,19)   #dialegei mono toy tuxaia noumera
+#         if cardHasNoBounds(numberOfCardChoosen):# and gameAgeOneCardsIsPicked[numberOfCardChoosen-1]==False:
+#             setCardIsTaken(numberOfCardChoosen)
 #             gameAgeOneCardsIsPicked[numberOfCardChoosen-1]=True
 #             updateBounds(numberOfCardChoosen)
 #             notTakenYet=False
@@ -95,9 +126,6 @@ playAgeOne()
 #             #     print('Human takes ',gameAgeOneCards[numberOfCardChoosen-1])
         
 
-# def chooseFirstPlayer():
-#     global currentPlayer
-#     currentPlayer[0]=random.randint(0,1)
 
 # def canTake(cardNo):
 #     if ageOneDictionary[str(cardNo)][0] !=1:
@@ -115,7 +143,7 @@ playAgeOne()
         
 
 # def roundAgeOne():
-#     shuffleAgeOneCardsAndCreateStacks()
+#     shuffleAgeOneCardsAndcreateStack()
 #     for i in range(0,20):
 #         printAgeOneStack()
 #         selectAgeOneCard() #να αλλάξει το όνομα σε selectAgeOneCard()
@@ -182,7 +210,7 @@ playAgeOne()
 # print('666 ',currentPlayer[0])
 # print(cityOfPlayer[currentPlayer[0]])
 # chooseFirstPlayer()
-# shuffleAgeOneCardsAndCreateStacks()
+# shuffleAgeOneCardsAndcreateStack()
 # keepcard(2)
 # print(gameAgeOneCards[2])
 # print(coins[0])
@@ -191,7 +219,7 @@ playAgeOne()
 # print(cityOfPlayer[currentPlayer[0]])
 
 # '''
-# shuffleAgeOneCardsAndCreateStacks()
+# shuffleAgeOneCardsAndcreateStack()
 # print(gameAgeOneCards)
 # newBuild(2)
 # '''
