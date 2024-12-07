@@ -24,3 +24,12 @@ def printGameStartLogo():
     print(GREEN,'* 7Wonder DUEL STARTS!!!   *')
     print(GREEN,'*     by C.G 2024          *')
     print(CYAN,'****************************',RESET)
+
+def getRand(pdf): #return 0,1,2,..,length(pdf)-1
+    n=random.randint(0,100)   
+    sum=0
+    for i in range(0,len(pdf)): # i=1,2,3
+        if n<pdf[i]+sum:
+            return i+1
+        sum+=pdf[i]
+    return -1

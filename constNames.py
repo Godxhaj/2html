@@ -1,12 +1,16 @@
 from colors import *
+import os
 currentPlayer=[0]
 playerWonders=[[],[]]
 Noboby,Computer,Human,Burned=-1,0,1,2
 playerName=["Computer","Human"]
 coins=[7,7] # coins of Computer,Human
 roundOne,roundTwo=0,1
+actionOffset=1000
+BuildBuilding,Discard,BuildWonders=1001,1002,1003
 
-Turned,Taken=1,0
+#Turned,Taken=1,0
+Available,Taken=1,0
 NoBounds=1
 EndOfCards=-1
 
@@ -15,7 +19,7 @@ minmax=[]
 playersCards=[[],[]]
 discardedCards=[]
 
-lista=[-1]*100
+lista=[-1]*10000
 Wood, Brick, Stone, Glass, Papyrus = 10, 11, 12, 13, 14
 GlassOrPapyrus, WoodOrStoneOrBrick=15,16
 Attack, Vpoint = 20, 21
@@ -78,3 +82,7 @@ lista[Acropoli]="Acropoli"
 lista[Sun]="Sun"
 lista[Home]="Home"
 lista[Barel]="Barel"
+
+lista[BuildBuilding]="BuildBuilding"
+lista[Discard]="Discard"
+lista[BuildWonders]="BuildWonders"
