@@ -41,7 +41,6 @@ def updateStateOfCards(): # ανανεώνει ενδεχόμενη κατάστ
             turnCard(i)
 
 
-
 def updateAndPrintAgeOneStack(): #ok
     updateStateOfCards()
     print(YELLOW,"+--------  AGE ONE STACK  ------------------------+",RESET)
@@ -91,6 +90,24 @@ def allCardsAreTaken():
     return cardsTaken==20
 
 
+def giveAllTheAvailabeCards():
+    z=[]
+    for i in range(0,len(ageOneDictionary)):
+        card=ageOneDictionary[str(i+1)][0]
+        if card==Available:
+            z.append(ageOneCards[i])
+    return z
+
+
+def selectTheHeighestScoreCardFromAvailble():
+    cards=[]
+    z=[]
+    cards=giveAllTheAvailabeCards()#μας εχει δωσει τα ονοματα των καρτων
+    for i in cards:
+        z.append(evaluateTheCard(gameAgeOneCards.index(i)))#h z list exei mesa score[a,b,c]
+    maxScore=max(z)#max score from free cards
+    p=z.index(max(z))
+    return gameAgeOneCards.index(cards[p])
 
 def selectRandomlyAgeOneCard():
     i=0
@@ -155,7 +172,7 @@ def playerActs(action,card):
 
 def getAgeOneCard():
     global ageOneDictionary
-    numberOfCardToGet=selectRandomlyAgeOneCard()
+    numberOfCardToGet=selectTheHeighestScoreCardFromAvailble()#selectRandomlyAgeOneCard()
     if numberOfCardToGet==EndOfCards:
         return EndOfCards
     setCardIsTaken(numberOfCardToGet)
@@ -214,7 +231,9 @@ for i in range(0,len(gameAgeOneCards)):
     a.append(z)
 
 print("+++++++++++++")
-a_sorted = sorted(a, key=lambda x: x[1])
+a_sorted = sorted(a, key=lambda x: x[1],reverse=True)
 
 for row in a_sorted:
     print(row)
+
+
