@@ -4,7 +4,7 @@ progressIndicators=["agriculture","architecture","economy","law","masonry","math
 gameProgressIndicators=[]
 isGameProgressIndicatorOnBoard=[True,True,True,True,True]
 
-strategyIndicatorPosition=0
+strategyIndicatorPosition=[0]
 
 BLACK = '\033[30m'
 RED = '\033[31m'
@@ -40,7 +40,7 @@ def printStrategyBoard():
             ch="  "
         else:
             ch=""
-        if i==strategyIndicatorPosition+9:
+        if i==strategyIndicatorPosition[0]+9:
             str+=ch+regionColors[getReg(ind)]+"(S)"+ch+RESET
         else:
             str+=ch+regionColors[getReg(ind)]+"( )"+ch+RESET

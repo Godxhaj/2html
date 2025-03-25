@@ -10,53 +10,56 @@ randomly=False
 def ss(s): # τυπώνει το string αφήνοντας ένα κενό στην αρχή και στο τέλος
     return f" {s.strip()} "
 
-def shuffleAgeOneCards():
-    global ageOneCards
-    random.shuffle(ageOneCards)
+def shuffleAgeTwoCards():
+    global ageTwoCards
+    random.shuffle(ageTwoCards)
 
-def getTwentyAgeOneCards():
-    global gameAgeOneCards
-    gameAgeOneCards=ageOneCards[:20]# επιλέγουμε τις 20 πρώτες κάρτες μετά το ανακάτεμα
+def getTwentyAgeTwoCards():
+    global gameAgeTwoCards
+    gameAgeTwoCards=ageTwoCards[:20]# επιλέγουμε τις 20 πρώτες κάρτες μετά το ανακάτεμα
 
 
 def createStack(): #ok
-    global gameAgeOneCardsStacks,gameAgeOneCardsIsTurned    
-    gameAgeOneCardsStacks=[gameAgeOneCards[:2],gameAgeOneCards[2:5],gameAgeOneCards[5:9],gameAgeOneCards[9:14],gameAgeOneCards[14:20]]
-    gameAgeOneCardsIsTurned[:2]=[True]*2
-    gameAgeOneCardsIsTurned[2:5]=[False]*3
-    gameAgeOneCardsIsTurned[5:9]=[True]*4
-    gameAgeOneCardsIsTurned[9:14]=[False]*5
-    gameAgeOneCardsIsTurned[14:20]=[True]*6
+    global gameAgeTwoCardsStacks,gameAgeTwoCardsIsTurned    
+    
+    gameAgeTwoCardsStacks=[gameAgeTwoCards[:6],gameAgeTwoCards[6:11],gameAgeTwoCards[11:15],gameAgeTwoCards[15:18],gameAgeTwoCards[18:20]]
+
+
+    gameAgeTwoCardsIsTurned[:6]=[True]*6
+    gameAgeTwoCardsIsTurned[6:11]=[False]*5
+    gameAgeTwoCardsIsTurned[11:15]=[True]*4
+    gameAgeTwoCardsIsTurned[15:18]=[False]*3
+    gameAgeTwoCardsIsTurned[18:20]=[True]*2
 
 
 
 
 
 def cardHasNoBounds(n):
-    return ageOneDictionary[str(n+1)][0]==NoBounds    
+    return ageTwoDictionary[str(n+1)][0]==NoBounds    
 def turnCard(n):
-    gameAgeOneCardsIsTurned[n]=True
+    gameAgeTwoCardsIsTurned[n]=True
 
 
 
 
 def updateStateOfCards(): # ανανεώνει ενδεχόμενη κατάσταση επιλογής κάρτας
-    global gameAgeOneCardsIsTurned,minmax
+    global gameAgeTwoCardsIsTurned,minmax
     for i in range(0,20):
         if cardHasNoBounds(i):
             turnCard(i)
 
 
-def updateAndPrintAgeOneStack(): #ok
+def updateAndPrintAgeTwoStack(): #ok
     updateStateOfCards()
-    print(YELLOW,"+--------  AGE ONE STACK  ------------------------+",RESET)
+    print(YELLOW,"+--------  AGE TWO STACK  ------------------------+",RESET)
     counterOfCardsList=0                                 # a variable to run from 0 to 19 via loops and check  the lists we have for turned,picked.
     gap=[33,24,15,6,0]
     line=0
-    for i in range(0,len(gameAgeOneCardsStacks)):        # 0,1,2,3,4,
+    for i in range(0,len(gameAgeTwoCardsStacks)):        # 0,1,2,3,4,
         print(gp(gap[line]),end=' ')
-        for items in gameAgeOneCardsStacks[i]:           # for i =0 [pitsa souvlaki]---> items= pitsa souvlaki             
-            if gameAgeOneCardsIsTurned[counterOfCardsList]==False:
+        for items in gameAgeTwoCardsStacks[i]:           # for i =0 [pitsa souvlaki]---> items= pitsa souvlaki             
+            if gameAgeTwoCardsIsTurned[counterOfCardsList]==False:
                 #print("[-----------]",end='   ')
                 col=BLUE
                 print(col,end=' ')
@@ -64,13 +67,13 @@ def updateAndPrintAgeOneStack(): #ok
                 print(RESET,end=' ')
             else:
                 #if(ageOneDictionary[str(i+1)][0]==Taken):
-                if(ageOneDictionary[str(counterOfCardsList+1)][0]==Taken):
+                if(ageTwoDictionary[str(counterOfCardsList+1)][0]==Taken):
                     col=RED
                     print(col,end=' ')
                     print(items,end=' ')
                     #print('             ',end=' ')
                     print(RESET,end=' ')
-                elif(ageOneDictionary[str(counterOfCardsList+1)][0]==Available):  # at ageOneDictionary( the 1st varible is 1==it means its available to be choosen)
+                elif(ageTwoDictionary[str(counterOfCardsList+1)][0]==Available):  # at ageOneDictionary( the 1st varible is 1==it means its available to be choosen)
                     print(GREEN,end=' ')
                     print(items,end=' ')
                     print(RESET,end=' ')
@@ -83,32 +86,32 @@ def updateAndPrintAgeOneStack(): #ok
     print(YELLOW,"+------------------------------------------+",RESET)
 
 
-def playAgeOne():
-    shuffleAgeOneCards() # ανακατεύονται όλες οι κάρτες
-    getTwentyAgeOneCards() #επιλέγονται 20 κάρτες από τις 23
+def playAgeTwo():
+    shuffleAgeTwoCards() # ανακατεύονται όλες οι κάρτες
+    getTwentyAgeTwoCards() #επιλέγονται 20 κάρτες από τις 23
     createStack() # 
-    updateAndPrintAgeOneStack()
+    updateAndPrintAgeTwoStack()
 
 def setCardIsTaken(n):
-    global ageOneDictionary
-    ageOneDictionary[str(n+1)][0]=Taken
+    global ageTwoDictionary
+    ageTwoDictionary[str(n+1)][0]=Taken
 
 def setCardIsDiscarded(n):
-    global ageOneDictionary
-    ageOneDictionary[str(n+1)][0]=Discarded
+    global ageTwoDictionary
+    ageTwoDictionary[str(n+1)][0]=Discarded
     #print("mitsosss ",ageOneCards[n])
-    discardedCards.append(ageOneCards[n])
+    discardedCards.append(ageTwoCards[n])
 
 
 def setCardIsWondered(n):
-    global ageOneDictionary
-    ageOneDictionary[str(n+1)][0]=CoveredByWonder
+    global ageTwoDictionary
+    ageTwoDictionary[str(n+1)][0]=CoveredByWonder
 
 
 def allCardsAreTaken():
     cardsTaken=0
     for i in range(0,20):
-        if ageOneDictionary[str(i+1)][0]==Taken:
+        if ageTwoDictionary[str(i+1)][0]==Taken:
             cardsTaken+=1
     #print("   Cards Taken=",cardsTaken)
     return cardsTaken==20
@@ -116,10 +119,10 @@ def allCardsAreTaken():
 
 def giveAllTheAvailableCards():
     availableCards=[]
-    for i in range(0,len(ageOneDictionary)):
-        card=ageOneDictionary[str(i+1)][0]
+    for i in range(0,len(ageTwoDictionary)):
+        card=ageTwoDictionary[str(i+1)][0]
         if card==Available:
-            availableCards.append(ageOneCards[i])    
+            availableCards.append(ageTwoCards[i])    
     return availableCards
 
 
@@ -127,7 +130,7 @@ def createNormalizeScoreListOfAvailableCards(prnt,availableCards):
     scoreOfAvailableCards=[]
     #availableCards=giveAllTheAvailableCards()#επιστρέφει τα ονόματα των διαθέσιμων καρτών
     for card in availableCards:
-        scoreOfAvailableCards.append(evaluateTheCard(gameAgeOneCards.index(card)))#h z list exei mesa score[a,b,c]
+        scoreOfAvailableCards.append(evaluateTheCard(gameAgeTwoCards.index(card)))#h z list exei mesa score[a,b,c]
     #print(scoreOfAvailableCards)
     HighestScore=max(scoreOfAvailableCards)
     LowestScore=min(scoreOfAvailableCards)        
@@ -151,7 +154,7 @@ def selectTheHeighestScoreCardFromAvailble2():
         availableCards=giveAllTheAvailableCards() #επιστρέφει τα ονόματα των διαθέσιμων καρτών
         indexOfMaxScoredCardInAvailableList=createNormalizeScoreListOfAvailableCards(1,availableCards).index(max(createNormalizeScoreListOfAvailableCards(0,availableCards)))    
         #print('222 ', availableCards[indexOfMaxScoredCardInAvailableList])
-        return gameAgeOneCards.index(availableCards[indexOfMaxScoredCardInAvailableList])    
+        return gameAgeTwoCards.index(availableCards[indexOfMaxScoredCardInAvailableList])    
     return EndOfCards
 
 def selectTheHeighestScoreCardFromAvailble():    
@@ -159,9 +162,9 @@ def selectTheHeighestScoreCardFromAvailble():
     #print('999')
     indexOfMaxScoredCardInAvailableList=createNormalizeScoreListOfAvailableCards(1,availableCards).index(max(createNormalizeScoreListOfAvailableCards(0,availableCards)))    
     #print('888 ', availableCards[indexOfMaxScoredCardInAvailableList])
-    return gameAgeOneCards.index(availableCards[indexOfMaxScoredCardInAvailableList])    
+    return gameAgeTwoCards.index(availableCards[indexOfMaxScoredCardInAvailableList])    
 
-def selectRandomlyAgeOneCard():
+def selectRandomlyAgeTwoCard():
     i=0
     while(not allCardsAreTaken()):
         numberOfCardChoosen=random.randint(0,19)         
@@ -178,15 +181,15 @@ def scoreAvailableCards():
     print()
 
 def lookAtColorOfCard(card):
-    color=cardsDict["Age1"][gameAgeOneCards[card]][0]
+    color=cardsDict["Age2"][gameAgeTwoCards[card]][0]
     return color # return the color with its value not by name
 
 def lookAtCostOfCard(card):
-    cost=cardsDict["Age1"][gameAgeOneCards[card]][1]
+    cost=cardsDict["Age2"][gameAgeTwoCards[card]][1]
     return cost
 
 def lookAtGoodsOfCard(card):
-    goods=cardsDict["Age1"][gameAgeOneCards[card]][2]
+    goods=cardsDict["Age2"][gameAgeTwoCards[card]][2]
     return goods
 
 def evaluateColor(color):
@@ -208,7 +211,7 @@ def evaluateTheCard(card):
 
 
 
-def playerDecidesActionForAgeOneCard():
+def playerDecidesActionForAgeTwoCard():
     actionPDF=[60,30,10]
     #actionForFreeCard=[95,5]
     action=getRand(actionPDF)+actionOffset
@@ -218,7 +221,7 @@ def playerActs(action,card):
     #print('card=>',card)   
     if action==BuildBuilding:
         if playerBuildsBuilding(card):
-            getAgeOneCard(card)          
+            getAgeTwoCard(card)          
             #return True
         else:
             return False
@@ -233,22 +236,22 @@ def playerActs(action,card):
 
 
 
-def inspectAgeOneCard():
-    global ageOneDictionary
+def inspectAgeTwoCard():
+    global ageTwoDictionary
     numberOfCardToInspect=selectTheHeighestScoreCardFromAvailble()
     if numberOfCardToInspect==EndOfCards:
         return EndOfCards
     return numberOfCardToInspect
     
 
-def getAgeOneCard(numberOfCardToGet):
-    global ageOneDictionary
+def getAgeTwoCard(numberOfCardToGet):
+    global ageTwoDictionary
     setCardIsTaken(numberOfCardToGet)
     releaseCardBounds(numberOfCardToGet)
-    print(playerName[currentPlayer[0]],' has ',ss(ageOneCards[numberOfCardToGet][1:-1]),' and decides...') 
+    print(playerName[currentPlayer[0]],' has ',ss(ageTwoCards[numberOfCardToGet][1:-1]),' and decides...') 
     return numberOfCardToGet
 
-def getAgeOneCard2():
+def getAgeTwoCard2():
     global ageOneDictionary
     numberOfCardToGet=selectTheHeighestScoreCardFromAvailble()
     #numberOfCardToGet=selectRandomlyAgeOneCard()
@@ -257,7 +260,7 @@ def getAgeOneCard2():
         return EndOfCards
     setCardIsTaken(numberOfCardToGet)
     releaseCardBounds(numberOfCardToGet)
-    print(playerName[currentPlayer[0]],' has ',ageOneCards[numberOfCardToGet],' and decides...') 
+    print(playerName[currentPlayer[0]],' has ',ageTwoCards[numberOfCardToGet],' and decides...') 
     return numberOfCardToGet
 
 
@@ -287,7 +290,7 @@ def playerHasMaterialToBuildTheCard(material):
     return cityOfPlayer[currentPlayer[0]].count(material)>0
 
 def playerHasMaterialsToBuildTheCard(card):
-    for material in cardsDict["Age1"][gameAgeOneCards[card]][1][1:]:
+    for material in cardsDict["Age1"][gameAgeTwoCards[card]][1][1:]:
         if not(playerHasMaterialToBuildTheCard(material)):
             return False
     return True
@@ -299,10 +302,10 @@ def playerBuildsBuilding(card): #for card =free money,no  check if its possible
     global cityOfPlayer,coins
     if playerMeetsCardRequirements(card):
         #checkEventualAttack(card)
-        cityOfPlayer[currentPlayer[0]].extend(cardsDict["Age1"][gameAgeOneCards[card]][2])  
+        cityOfPlayer[currentPlayer[0]].extend(cardsDict["Age1"][gameAgeTwoCards[card]][2])  
         cityOfPlayer[currentPlayer[0]]=rearrangePlayerList()
         coins[currentPlayer[0]]-=lookAtCostOfCard(card)[0]
-        print(GREEN,playerName[currentPlayer[0]],"gets",ss(ageOneCards[card][1:-1]),end='')
+        print(GREEN,playerName[currentPlayer[0]],"gets",ss(ageTwoCards[card][1:-1]),end='')
         print("and builds building and from now on has",coins[currentPlayer[0]],"coins and the following items" ,cityOfPlayerNames(),RESET) 
         #print(GREEN,playerName[currentPlayer[0]],"builds building and from now on has the following items" ,cityOfPlayerNames(),"in his city, and has ",coins[currentPlayer[0]],' coins',RESET) 
         return True        
@@ -312,58 +315,59 @@ def playerBuildsBuilding(card): #for card =free money,no  check if its possible
     return False
 
 def playerDiscardsCard(card):
-    print(RED,playerName[currentPlayer[0]],"discards the Age One card:",ss(ageOneCards[card][1:-1]),RESET)
+    print(RED,playerName[currentPlayer[0]],"discards the Age One card:",ss(ageTwoCards[card][1:-1]),RESET)
     setCardIsDiscarded(card)
     releaseCardBounds(card)
 
     
 def playerBuildsWonder(card):
-    print(YELLOW,playerName[currentPlayer[0]],"gets" + ss(ageOneCards[card][1:-1])+"and builds wonder",RESET)
+    print(YELLOW,playerName[currentPlayer[0]],"gets" + ss(ageTwoCards[card][1:-1])+"and builds wonder",RESET)
     setCardIsWondered(card)
     releaseCardBounds(card)
 
 
 def releaseCardBounds(card):
-    global ageOneDictionary
-    for i in range (0,14):
-        if ageOneDictionary[str(i+1)][1]==str(card+1):
-            ageOneDictionary[str(i+1)][0]-=1
+    global ageTwoDictionary
+    for i in range (0,18):
+        if ageTwoDictionary[str(i+1)][1]==str(card+1):
+            ageTwoDictionary[str(i+1)][0]-=1
             #print('444 ',gameAgeOneCards[i],ageOneDictionary[str(i+1)])
-        if  ageOneDictionary[str(i+1)][2]==str(card+1):
-            ageOneDictionary[str(i+1)][0]-=1
+        if  ageTwoDictionary[str(i+1)][2]==str(card+1):
+            ageTwoDictionary[str(i+1)][0]-=1
             #print('333 ',gameAgeOneCards[i],ageOneDictionary[str(i+1)])
 
 
 
 os.system('cls')
 
-def playAgeOneGameInit():
-    shuffleAgeOneCards()
-    getTwentyAgeOneCards()
+def playAgeTwoGameInit():
+    shuffleAgeTwoCards()
+    getTwentyAgeTwoCards()
     createStack()
+    print("this is the init")
 
-def selectOneCard():
+def selectTwoCard():
     selectAnotherCard=True
     tries=0        
     while(selectAnotherCard):
-        numberOfCardToInspect=inspectAgeOneCard()
+        numberOfCardToInspect=inspectAgeTwoCard()
         if tries<100:                    
-            action=playerDecidesActionForAgeOneCard()  
+            action=playerDecidesActionForAgeTwoCard()  
         else:
             action=Discard      
         selectAnotherCard=not playerActs(action,numberOfCardToInspect)  
         tries+=1
 
-def playAgeOneGame():    
-    updateAndPrintAgeOneStack()
-    selectOneCard()
+def playAgeTwoGame():    
+    updateAndPrintAgeTwoStack()
+    selectTwoCard()
     switchPlayer()    
     cardsOnBoard[0]=cardsOnBoard[0]-1
     if cardsOnBoard[0]>0:
-        return stateOne
+        return stateTwo
     print("End of Age One Cards!")    
-    #return finalState
-    return stateTwoInit
+    return finalState
+    #return stateTwoInit
 
 
 

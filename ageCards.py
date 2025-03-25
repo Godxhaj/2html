@@ -6,6 +6,11 @@ gameAgeOneCardsIsTurned=[False]*20
 gameAgeOneCardsStacks=[]
 gameAgeOneCardsIsPicked=[False]*20
 
+# initialize age 2 attributes
+gameAgeTwoCards=[]
+gameAgeTwoCardsIsTurned=[False]*20
+gameAgeTwoCardsStacks=[]
+gameAgeTwoCardsIsPicked=[False]*20
 
 #age 1 card names
 cardsDict={
@@ -18,7 +23,7 @@ cardsDict={
     "[  StonePit  ]":[Brown, [1], [0,Stone]],
     "[ Glassworks ]":[Grey, [1], [0,Glass]],
     "[   Press    ]":[Grey, [1], [0,Papyrus]],
-    "[ GuardTower ]":[Red, [0], [0,Attack]],
+    "[ GuardTower ]":[Red, [0], [0,Attack,Attack,Attack,Attack]],
     "[  WorkShop  ]":[Green, [0,Papyrus], [0,Triangle,Vpoint]],
     "[ Apothecary ]":[Green, [0,Glass], [0,Wheel,Vpoint]],
     "[StoneReserve]":[Gold, [3], [0,StoneDec]],
@@ -34,30 +39,30 @@ cardsDict={
     "[    Baths   ]":[Blue, [0,Stone], [0,Vpoint,Vpoint,Vpoint,Drop]],
     "[   Tavern   ]":[Gold, [0], [4,Vase]]       
     },
-    "Age2":{
-    "Sawmill": [Brown, [2], [0,Wood,Wood]],
-    "Brickyard": [Brown, [2], [0,Brick,Brick]],
-    "ShelfQuarry": [Brown, [2], [0,Stone,Stone]],
-    "GlassBlower": [Grey, [0], [0,Glass]],
-    "Drying Room": [Grey, [0], [0,Papyrus]],
-    "Walls": [Red, [0,Stone,Stone],[0,Attack,Attack]],
-    "Forum": [Gold, [3,Brick],[0,GlassOrPapyrus]],
-    "Caravansery": [Gold, [2,Glass,Papyrus],[0,WoodOrStoneOrBrick]],
-    "CustomsHouse": [Gold, [4],[0,GlassDec,PapyrusDec]],
-    "Tribunal": [Blue, [0,Wood, Wood,Glass], [0,Vpoint,Vpoint,Vpoint,Vpoint,Vpoint]],
-    "HorseBreeders": [Red, [0,Wood, Brick,Petal], [0,Attack]],
-    "Barracks": [Red, [3,Knife], [0,Attack]],
-    "ArcheryRange": [Red,[0,Wood,Stone,Papyrus],[0,Attack,Attack,Shield]],
-    "Parade Ground": [Red, [0,Brick,Brick,Glass], [0,Attack,Attack,Helmet]],
-    "Library": [Green, [0,Stone,Wood,Glass,Book], [0,Feather,Vpoint,Vpoint]],
-    "Dispensary": [Green, [0,Brick,Brick,Stone,Setting],[0,Plate,Vpoint,Vpoint]],
-    "School": [Green, [0,Wood,Papyrus,Papyrus],[0,Vpoint,Wheel,Harp]],
-    "Laboratory": [Green, [0,Wood,Glass,Glass],[0,Vpoint,Triangle,Lamp]],
-    "Statue": [Blue, [0,Brick,Brick,Mask],[0,Vpoint,Vpoint,Vpoint,Vpoint,Acropoli]],
-    "Temple": [Blue, [0,Moon,Wood,Papyrus], [0,Vpoint,Vpoint,Vpoint,Vpoint,Sun]],
-    "Aqueduct": [Blue,[0,Stone,Stone,Stone,Drop],[0,Vpoint,Vpoint,Vpoint,Vpoint,Vpoint]],
-    "Rostrum": [Blue,[0,Stone,Wood],[0,Vpoint,Vpoint,Vpoint,Vpoint,Home]],
-    "Brewery": [Gold,[0], [6,Barel]],
+  "Age2": {
+    "[   Sawmill   ]": [Brown, [2], [0,Wood,Wood]],
+    "[  Brickyard  ]": [Brown, [2], [0,Brick,Brick]],
+    "[ ShelfQuarry ]": [Brown, [2], [0,Stone,Stone]],
+    "[ GlassBlower ]": [Grey, [0], [0,Glass]],
+    "[ Drying Room ]": [Grey, [0], [0,Papyrus]],
+    "[    Walls    ]": [Red, [0,Stone,Stone],[0,Attack,Attack]],
+    "[    Forum    ]": [Gold, [3,Brick],[0,GlassOrPapyrus]],
+    "[ Caravansery ]": [Gold, [2,Glass,Papyrus],[0,WoodOrStoneOrBrick]],
+    "[ CustomsHouse]": [Gold, [4],[0,GlassDec,PapyrusDec]],
+    "[   Tribunal  ]": [Blue, [0,Wood,Wood,Glass], [0,Vpoint,Vpoint,Vpoint,Vpoint,Vpoint]],
+    "[HorseBreeders]": [Red, [0,Wood,Brick,Petal], [0,Attack]],
+    "[   Barracks  ]": [Red, [3,Knife], [0,Attack]],
+    "[ ArcheryRange]": [Red,[0,Wood,Stone,Papyrus],[0,Attack,Attack,Shield]],
+    "[Parade Ground]": [Red, [0,Brick,Brick,Glass], [0,Attack,Attack,Helmet]],
+    "[   Library   ]": [Green, [0,Stone,Wood,Glass,Book], [0,Feather,Vpoint,Vpoint]],
+    "[ Dispensary  ]": [Green, [0,Brick,Brick,Stone,Setting],[0,Plate,Vpoint,Vpoint]],
+    "[    School   ]": [Green, [0,Wood,Papyrus,Papyrus],[0,Vpoint,Wheel,Harp]],
+    "[  Laboratory ]": [Green, [0,Wood,Glass,Glass],[0,Vpoint,Triangle,Lamp]],
+    "[    Statue   ]": [Blue, [0,Brick,Brick,Mask],[0,Vpoint,Vpoint,Vpoint,Vpoint,Acropoli]],
+    "[    Temple   ]": [Blue, [0,Moon,Wood,Papyrus], [0,Vpoint,Vpoint,Vpoint,Vpoint,Sun]],
+    "[  Aqueduct   ]": [Blue,[0,Stone,Stone,Stone,Drop],[0,Vpoint,Vpoint,Vpoint,Vpoint,Vpoint]],
+    "[   Rostrum   ]": [Blue,[0,Stone,Wood],[0,Vpoint,Vpoint,Vpoint,Vpoint,Home]],
+    "[   Brewery   ]": [Gold,[0], [6,Barel]]
 },
 
     "Age3":{
@@ -92,6 +97,29 @@ ageOneDictionary={
     "16":[1],
     "17":[1],
     "18":[1],
+    "19":[1],
+    "20":[1],
+}
+
+ageTwoDictionary={
+    "1":[3,"7","7"],
+    "2":[3,"7","8"],
+    "3":[3,"8","9"],
+    "4":[3,"9","10"],
+    "5":[3,"10","11"],
+    "6":[3,"11","11"],
+    "7":[3,"12","12"],
+    "8":[3,"12","13"],
+    "9":[3,"13","14"],
+    "10":[3,"14","15"],
+    "11":[3,"15","15"],
+    "12":[3,"16","16"],
+    "13":[3,"16","17"],
+    "14":[3,"17","18"],
+    "15":[3,"18","18"],
+    "16":[3,"19","19"],
+    "17":[3,"19","20"],
+    "18":[3,"20","20"],
     "19":[1],
     "20":[1],
 }
