@@ -55,9 +55,10 @@ def updateAndPrintAgeTwoStack(): #ok
     print(YELLOW,"+--------  AGE TWO STACK  ------------------------+",RESET)
     counterOfCardsList=0                                 # a variable to run from 0 to 19 via loops and check  the lists we have for turned,picked.
     gap=[33,24,15,6,0]
+    pag=[0,6,15,24,33]
     line=0
     for i in range(0,len(gameAgeTwoCardsStacks)):        # 0,1,2,3,4,
-        print(gp(gap[line]),end=' ')
+        print(gp(pag[line]),end=' ')
         for items in gameAgeTwoCardsStacks[i]:           # for i =0 [pitsa souvlaki]---> items= pitsa souvlaki             
             if gameAgeTwoCardsIsTurned[counterOfCardsList]==False:
                 #print("[-----------]",end='   ')
@@ -290,7 +291,7 @@ def playerHasMaterialToBuildTheCard(material):
     return cityOfPlayer[currentPlayer[0]].count(material)>0
 
 def playerHasMaterialsToBuildTheCard(card):
-    for material in cardsDict["Age1"][gameAgeTwoCards[card]][1][1:]:
+    for material in cardsDict["Age2"][gameAgeTwoCards[card]][1][1:]:
         if not(playerHasMaterialToBuildTheCard(material)):
             return False
     return True
@@ -302,7 +303,7 @@ def playerBuildsBuilding(card): #for card =free money,no  check if its possible
     global cityOfPlayer,coins
     if playerMeetsCardRequirements(card):
         #checkEventualAttack(card)
-        cityOfPlayer[currentPlayer[0]].extend(cardsDict["Age1"][gameAgeTwoCards[card]][2])  
+        cityOfPlayer[currentPlayer[0]].extend(cardsDict["Age2"][gameAgeTwoCards[card]][2])  
         cityOfPlayer[currentPlayer[0]]=rearrangePlayerList()
         coins[currentPlayer[0]]-=lookAtCostOfCard(card)[0]
         print(GREEN,playerName[currentPlayer[0]],"gets",ss(ageTwoCards[card][1:-1]),end='')
@@ -345,6 +346,8 @@ def playAgeTwoGameInit():
     getTwentyAgeTwoCards()
     createStack()
     print("this is the init")
+    #updateAndPrintAgeTwoStack()
+    
 
 def selectTwoCard():
     selectAnotherCard=True
@@ -362,15 +365,25 @@ def playAgeTwoGame():
     updateAndPrintAgeTwoStack()
     selectTwoCard()
     switchPlayer()    
-    cardsOnBoard[0]=cardsOnBoard[0]-1
-    if cardsOnBoard[0]>0:
+    cardsOnBoard[1]=cardsOnBoard[1]-1
+    if cardsOnBoard[1]>0:
         return stateTwo
     print("End of Age One Cards!")    
     return finalState
     #return stateTwoInit
 
 
+####
 
+# playAgeTwoGameInit()
+def playTwo():
+        updateAndPrintAgeTwoStack()
+        selectTwoCard()
+        switchPlayer()
+        cardsOnBoard[1]=cardsOnBoard[1]-1
+        if cardsOnBoard[1]>0:
+            return stateTwo
+        return finalState
     
 
 

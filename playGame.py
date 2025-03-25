@@ -31,8 +31,12 @@ def playGame():
         elif currentState[0]==stateTwoInit:
             playAgeTwoGameInit()
             nextState=stateTwo
-        elif currentState[0]==stateTwo:                        
-            nextState=playAgeTwoGame()
+        elif currentState[0]==stateTwo:   
+            print("i am in Age2")                     
+            nextState=playTwo()
+            print("debugger")
+            print(currentState[0])
+            print("cards on board",cardsOnBoard[1])
             printGameBoard()
         # elif currentState[0]==stateThree:
         #     nextState=playAgeThreeGame()

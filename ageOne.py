@@ -4,6 +4,7 @@ from colors import *
 from ageCards import *
 from mainFunctions import *
 from constNames import *
+from map import *
 ############################
 randomly=False
 ############################
@@ -22,7 +23,7 @@ def getTwentyAgeOneCards():
 def createStack(): #ok
     global gameAgeOneCardsStacks,gameAgeOneCardsIsTurned    
     gameAgeOneCardsStacks=[gameAgeOneCards[:2],gameAgeOneCards[2:5],gameAgeOneCards[5:9],gameAgeOneCards[9:14],gameAgeOneCards[14:20]]
-    gameAgeOneCardsIsTurned[:2]=[True]*2
+    gameAgeOneCardsIsTurned[:2]=[True]*6
     gameAgeOneCardsIsTurned[2:5]=[False]*3
     gameAgeOneCardsIsTurned[5:9]=[True]*4
     gameAgeOneCardsIsTurned[9:14]=[False]*5
@@ -131,7 +132,7 @@ def createNormalizeScoreListOfAvailableCards(prnt,availableCards):
     #print(scoreOfAvailableCards)
     HighestScore=max(scoreOfAvailableCards)
     LowestScore=min(scoreOfAvailableCards)        
-    # print(YELLOW,LowestScore,HighestScore,RESET)    
+    # print(YELLOW,LowestScore,HighestScore,RESET)  \  
     # print(GREEN,availableCards,RESET)
     # print(RED,scoreOfAvailableCards,RESET)
     normalizedScoreList=[]   
@@ -209,7 +210,7 @@ def evaluateTheCard(card):
 
 
 def playerDecidesActionForAgeOneCard():
-    actionPDF=[60,30,10]
+    actionPDF=[70,30,0]
     #actionForFreeCard=[95,5]
     action=getRand(actionPDF)+actionOffset
     return action
@@ -294,11 +295,25 @@ def playerHasMaterialsToBuildTheCard(card):
 def playerMeetsCardRequirements(card):
     return coins[currentPlayer[0]]>=lookAtCostOfCard(card)[0] and playerHasMaterialsToBuildTheCard(card)
 
+def timesToAttack(card):
+    times=0
+    for i in (cardsDict["Age1"][gameAgeOneCards[card]][2]):
+            if i==Attack:
+                times=times+1
+    return times
+
+def ifCardHadAttack(card):
+    push=0
+    if Attack in cardsDict["Age1"][gameAgeOneCards[card]][2]: 
+        if currentPlayer[0]==Human:
+            strategyIndicatorPosition[0]=strategyIndicatorPosition[0]+timesToAttack(card)
+        else:
+            strategyIndicatorPosition[0]=strategyIndicatorPosition[0]-timesToAttack(card)
 
 def playerBuildsBuilding(card): #for card =free money,no  check if its possible
     global cityOfPlayer,coins
     if playerMeetsCardRequirements(card):
-        #checkEventualAttack(card)
+        ifCardHadAttack(card)
         cityOfPlayer[currentPlayer[0]].extend(cardsDict["Age1"][gameAgeOneCards[card]][2])  
         cityOfPlayer[currentPlayer[0]]=rearrangePlayerList()
         coins[currentPlayer[0]]-=lookAtCostOfCard(card)[0]
