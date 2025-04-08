@@ -4,6 +4,7 @@ import os
 stateOneInit,stateOne,stateTwoInit,stateTwo,stateThreeInit,stateThree,finalState=1,2,3,4,5,6,7
 currentState=[stateOneInit]
 
+strategyIndicatorPosition=[0]
 cardsOnBoard=[20,20,20]
 currentPlayer=[0]
 playerWonders=[[],[]]
@@ -20,6 +21,7 @@ NoBounds=1
 EndOfCards=-1
 
 cityOfPlayer=[[],[]]
+scoreOfPlayer=[[],[]]
 minmax=[]
 playersCards=[[],[]]
 discardedCards=[]
@@ -34,14 +36,25 @@ lista=[-1]*10000
 # Brown, Grey, Red, Green, Gold, Blue = 61, 62, 63, 64, 65, 66
 # Shield, Helmet, Harp, Lamp, Acropoli,Sun,Home,Barel=70,71,72,73,74,75,76,77
 
-Wood, Brick, Stone, Glass, Papyrus = 110, 111, 112, 113, 114  
-GlassOrPapyrus, WoodOrStoneOrBrick = 115, 116  
-Attack, Vpoint = 120, 121  
-Feather, Triangle, Wheel, Plate = 130, 131, 132, 133  
-Petal, Knife, Castle, Book, Setting, Vase, Mask, Moon, Drop = 140, 141, 142, 143, 144, 145, 146, 147, 148  
-StoneDec, BrickDec, WoodDec, GlassDec, PapyrusDec = 150, 151, 152, 153, 154  
-Brown, Grey, Red, Green, Gold, Blue = 161, 162, 163, 164, 165, 166  
-Shield, Helmet, Harp, Lamp, Acropoli, Sun, Home, Barel = 170, 171, 172, 173, 174, 175, 176, 177  
+# Wood, Brick, Stone, Glass, Papyrus = 110, 111, 112, 113, 114  
+# GlassOrPapyrus, WoodOrStoneOrBrick = 115, 116  
+# Attack, Vpoint = 120, 121  
+# Feather, Triangle, Wheel, Plate = 130, 131, 132, 133  
+# Petal, Knife, Castle, Book, Setting, Vase, Mask, Moon, Drop = 140, 141, 142, 143, 144, 145, 146, 147, 148  
+# StoneDec, BrickDec, WoodDec, GlassDec, PapyrusDec = 150, 151, 152, 153, 154  
+# Brown, Grey, Red, Green, Gold, Blue = 161, 162, 163, 164, 165, 166  
+# Shield, Helmet, Harp, Lamp, Acropoli, Sun, Home, Barel = 170, 171, 172, 173, 174, 175, 176, 177  
+
+
+Wood, Brick, Stone, Glass, Papyrus = 210, 211, 212, 213, 214  
+GlassOrPapyrus, WoodOrStoneOrBrick = 215, 216  
+Attack, Vpoint = 220, 221  
+Feather, Triangle, Wheel, Plate = 230, 231, 232, 233  
+Petal, Knife, Castle, Book, Setting, Vase, Mask, Moon, Drop = 240, 241, 242, 243, 244, 245, 246, 247, 248  
+StoneDec, BrickDec, WoodDec, GlassDec, PapyrusDec = 250, 251, 252, 253, 254  
+Brown, Grey, Red, Green, Gold, Blue = 261, 262, 263, 264, 265, 266  
+Shield, Helmet, Harp, Lamp, Acropoli, Sun, Home, Barel = 270, 271, 272, 273, 274, 275, 276, 277  
+
 
 lista[Noboby] = "Noboby"
 lista[Computer] = "Computer"

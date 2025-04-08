@@ -5,8 +5,10 @@ from map import*
 from ageOne import * 
 from ageTwo import *
 from constNames import *
+from cVictory import *
 import os
-
+import sys
+toFile=11
 def playAgeTwoGame():
     print()
 
@@ -14,7 +16,10 @@ def playAgeThreeGame():
     print()
 
 os.system('cls')
-def playGame():        
+def playGame():   
+    f = open('output.txt','w')
+    if toFile==1:
+        sys.stdout = f         
     printGameStartLogo()
     selectFirstPlayer() #επιλέγεται τυχαία ο πρώτος παίκτης μόνο στην εκκίνηση του παιχνιδιού
     # παίξιμο της φάσης επιλογής καρτών Wonder     
@@ -32,18 +37,14 @@ def playGame():
             playAgeTwoGameInit()
             nextState=stateTwo
         elif currentState[0]==stateTwo:   
-            print("i am in Age2")                     
             nextState=playTwo()
-            print("debugger")
-            print(currentState[0])
-            print("cards on board",cardsOnBoard[1])
             printGameBoard()
         # elif currentState[0]==stateThree:
         #     nextState=playAgeThreeGame()
         currentState[0]=nextState
 
 playGame()
-print( cardsDict["Age1"]["[  ClayPool  ]"][2])
+printFinalVictoryPoints()
 
 
 
@@ -51,5 +52,27 @@ print( cardsDict["Age1"]["[  ClayPool  ]"][2])
 #selectFirstPlayer() #επιλέγεται τυχαία ο πρώτος παίκτης
 #playWonder()   # παίξιμο της φάσης επιλογής καρτών Wonder 
 #printGameBoard()
+class CaptureOutput:
+    def __init__(self, filename):
+        self.terminal = sys.stdout  # Store original stdout
+        self.log = open(filename, "w", encoding="utf-8")
 
+    def write(self, message):
+        self.terminal.write(message)  # Print to terminal
+        self.log.write(message)  # Save to file
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
+# Redirect output to both terminal and file
+sys.stdout = CaptureOutput("output.txt")
+
+# Example prints with colors
+print("\033[31mRed Text\033[0m and \033[32mGreen Text\033[0m")
+
+# Restore original stdout after execution
+sys.stdout = sys.__stdout__
+
+print("Output saved to output.txt")
 

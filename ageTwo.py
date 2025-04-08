@@ -269,10 +269,12 @@ def cityOfPlayerNames():
     str2="\nItem      | qnt\n"
     str2+="----------+----\n"
     uniqueItems=list(set(cityOfPlayer[currentPlayer[0]]))
+    print(uniqueItems)
     for uItem in uniqueItems:
         times=cityOfPlayer[currentPlayer[0]].count(uItem)
-        if uItem>100 and uItem!=Attack:
-            spaces=" "*(10-len(lista[uItem]))
+        if uItem>200 and uItem!=Attack:
+            print('666 ',uItem, lista[uItem])
+            spaces=" "*(20-len(lista[uItem]))
             str2+=lista[uItem]+ spaces+ "| "
             str2+=str(times)+"\n"
     return str2

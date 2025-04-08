@@ -1,0 +1,1 @@
+[31mRed Text[0m and [32mGreen Text[0m

@@ -1,5 +1,5 @@
 import random
-
+#from constNames import *
 progressIndicators=["agriculture","architecture","economy","law","masonry","mathematics","philosophy","strategy","theology","urbanism"]
 gameProgressIndicators=[]
 isGameProgressIndicatorOnBoard=[True,True,True,True,True]
@@ -48,7 +48,7 @@ def printStrategyBoard():
     print(str)
 
 def getReg(i):
-    #global strategyIndicatorPosition
+    global strategyIndicatorPosition
     if i==0:
         reg=0
     else:
